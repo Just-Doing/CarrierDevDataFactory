@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_jfo",
+				"name": "CopyFromBlobToSql",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
