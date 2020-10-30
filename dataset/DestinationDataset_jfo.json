@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_jfo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ODS_AzureSqlDb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo.emp",
+			"table": "Azure Blob Storage file"
+		}
+	}
+}
