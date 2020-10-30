@@ -145,16 +145,7 @@
 								}
 							},
 							"sink": {
-								"type": "AzureSqlSink",
-								"sqlWriterStoredProcedureName": "[[stage].[clearTableData]",
-								"sqlWriterTableType": "tableName",
-								"storedProcedureTableTypeParameterName": "tableName",
-								"storedProcedureParameters": {
-									"tableName": {
-										"type": "String",
-										"value": "dbo.emp"
-									}
-								}
+								"type": "AzureSqlSink"
 							},
 							"enableStaging": false,
 							"validateDataConsistency": false,
