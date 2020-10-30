@@ -39,9 +39,9 @@
 						"type": "AzureSqlSink",
 						"sqlWriterStoredProcedureName": "[stage].[clearTableData]",
 						"sqlWriterTableType": "tableName",
-						"storedProcedureTableTypeParameterName": "tableName",
+						"storedProcedureTableTypeParameterName": "@tableName",
 						"storedProcedureParameters": {
-							"tableName": {
+							"@tableName": {
 								"type": "String",
 								"value": "dbo.emp"
 							}
