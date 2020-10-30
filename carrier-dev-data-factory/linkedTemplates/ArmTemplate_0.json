@@ -59,8 +59,8 @@
 				"type": "AzureSqlTable",
 				"schema": [],
 				"typeProperties": {
-					"schema": "dbo.emp",
-					"table": "Azure Blob Storage file"
+					"schema": "dbo",
+					"table": "emp"
 				}
 			},
 			"dependsOn": [
