@@ -6,105 +6,12 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "carrier-dev-data-factory"
-		},
-		"AzureBlobStorage1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
-		},
-		"ODS_AzureSqlDb_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ODS_AzureSqlDb'"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ODS_AzureSqlDb')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('ODS_AzureSqlDb_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DestinationDataset_jfo')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ODS_AzureSqlDb",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "emp"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ODS_AzureSqlDb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SourceDataset_jfo')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "1.csv",
-						"folderPath": "carrer_dev_sftp_user01/uploads",
-						"container": "carrer-dev-sftp-vm-01"
-					},
-					"columnDelimiter": "|",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "FirstName",
-						"type": "String"
-					},
-					{
-						"name": "LastName",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/CopyFromBlobToSqlDb')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -192,15 +99,13 @@
 						"inputs": [
 							{
 								"referenceName": "SourceDataset_jfo",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DestinationDataset_jfo",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -233,11 +138,7 @@
 				],
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_jfo')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_jfo')]",
-				"[concat(variables('factoryId'), '/linkedServices/ODS_AzureSqlDb')]"
-			]
+			"dependsOn": []
 		}
 	]
 }

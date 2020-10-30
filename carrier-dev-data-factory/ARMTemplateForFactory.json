@@ -29,7 +29,14 @@
 					{
 						"name": "CopyFromBlobToSql",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Stored procedure1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -111,13 +118,40 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Stored procedure1",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[stage].[clearTableData]",
+							"storedProcedureParameters": {
+								"tableName": {
+									"value": "dbo.emp",
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "ODS_AzureSqlDb",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_jfo')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_jfo')]"
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_jfo')]",
+				"[concat(variables('factoryId'), '/linkedServices/ODS_AzureSqlDb')]"
 			]
 		},
 		{
