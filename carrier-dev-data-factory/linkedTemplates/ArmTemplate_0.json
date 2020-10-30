@@ -146,7 +146,15 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"tableOption": "autoCreate"
+								"sqlWriterStoredProcedureName": "[[stage].[clearTableData]",
+								"sqlWriterTableType": "tableName",
+								"storedProcedureTableTypeParameterName": "tableName",
+								"storedProcedureParameters": {
+									"tableName": {
+										"type": "String",
+										"value": "dbo.emp"
+									}
+								}
 							},
 							"enableStaging": false,
 							"validateDataConsistency": false,
