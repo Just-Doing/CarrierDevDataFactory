@@ -405,7 +405,7 @@
 						"typeProperties": {
 							"storedProcedureName": "[[stage].[clearTableData]",
 							"storedProcedureParameters": {
-								"sql": {
+								"tableName": {
 									"value": "dbo.emp",
 									"type": "String"
 								}
