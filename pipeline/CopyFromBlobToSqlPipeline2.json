@@ -74,7 +74,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[stage].[clearTableData]"
+					"storedProcedureName": "[stage].[clearTableData]",
+					"storedProcedureParameters": {
+						"sql": {
+							"value": "dbo.emp",
+							"type": "String"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
