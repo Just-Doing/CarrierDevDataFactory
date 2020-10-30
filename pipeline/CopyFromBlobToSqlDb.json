@@ -38,8 +38,8 @@
 					"sink": {
 						"type": "AzureSqlSink",
 						"sqlWriterStoredProcedureName": "[stage].[clearTableData]",
-						"sqlWriterTableType": "tableName",
-						"storedProcedureTableTypeParameterName": "@tableName",
+						"sqlWriterTableType": "",
+						"storedProcedureTableTypeParameterName": "",
 						"storedProcedureParameters": {
 							"@tableName": {
 								"type": "String",
