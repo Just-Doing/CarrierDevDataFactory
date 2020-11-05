@@ -109,7 +109,7 @@
 					"storedProcedureName": "[stage].[clearTableData]",
 					"storedProcedureParameters": {
 						"tableName": {
-							"value": "dbo.emp",
+							"value": "",
 							"type": "String"
 						}
 					}
@@ -117,6 +117,76 @@
 				"linkedServiceName": {
 					"referenceName": "ODS_AzureSqlDb",
 					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Until1",
+				"type": "Until",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"timeout": "7.00:00:00"
+				}
+			},
+			{
+				"name": "Until2",
+				"type": "Until",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"activities": [
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": []
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": []
+						},
+						{
+							"name": "Stored procedure2",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[stage].[checkETLDependency]",
+								"storedProcedureParameters": {
+									"batchSize": {
+										"value": "",
+										"type": "Int32"
+									},
+									"skipCheck": {
+										"value": "",
+										"type": "Boolean"
+									},
+									"source": {
+										"value": "",
+										"type": "String"
+									},
+									"sourceFileName": {
+										"value": "",
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "ODS_AzureSqlDb",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"timeout": "7.00:00:00"
 				}
 			}
 		],
